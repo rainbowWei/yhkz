@@ -1,6 +1,7 @@
 <template>
   <div class="container">
     <div> 这是home页面</div>
+    <div> 这是home页面</div>
     <ul>
       <li v-for=" list in teacherlist" :key="list.id">
       </li>
