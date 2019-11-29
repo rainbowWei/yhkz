@@ -1,0 +1,9 @@
+@mixin size ($w, $h: $w) {
+  width: $w;
+  height: $h;
+}
+@mixin textOverflow {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

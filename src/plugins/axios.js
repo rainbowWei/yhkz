@@ -6,6 +6,7 @@ let config = {
   headers: {
     'Content-Type': 'application/json;charset=utf8'
   },
+  // baseURL: IS_DEV ? `http://yhkz.rainbow.site.com/a/example` : `http://dongju.tech`
   baseURL: IS_DEV ? `http://dongju.tech` : `http://dongju.tech`
 }
 
