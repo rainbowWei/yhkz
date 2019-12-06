@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <login-header></login-header>
-    <router-view/>
+    <router-view />
     <login-footer></login-footer>
   </div>
 </template>

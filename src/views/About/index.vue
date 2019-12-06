@@ -5,15 +5,17 @@
 </template>
 <script>
 export default {
-  
+  name: 'about',
+  data() {
+    return {}
+  }
 }
 </script>
 <style lang="scss" scoped>
-.about{
+.about {
   width: 100%;
   height: 450px;
   text-align: center;
   line-height: 450px;
 }
-
 </style>

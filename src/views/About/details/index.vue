@@ -1,18 +1,21 @@
 <template>
-  <div class="census">
-    <p>这是节能统计页面</p>
+  <div class="about">
+    <h1>这是公司简介</h1>
   </div>
 </template>
 <script>
 export default {
-  name: 'energyCensus'
+  name: 'aa',
+  data() {
+    return {}
+  }
 }
 </script>
 <style lang="scss" scoped>
-.census {
+.about {
   width: 100%;
-  min-height: 450px;
-  line-height: 450px;
+  height: 450px;
   text-align: center;
+  line-height: 450px;
 }
 </style>

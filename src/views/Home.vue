@@ -2,7 +2,7 @@
   <div class="container">
     <!-- <ul>
       <li v-for=" list in teacherlist" :key="list.id">{{list}}</li>
-    </ul> -->
+    </ul>-->
     <div class="banner">这是一个轮播图</div>
     <div class="content">
       <p>这里是有两大块内容1.HeroRTS系统的介绍2.HeroRTS系统总体架构以及产品功能</p>
@@ -14,16 +14,16 @@
 import { getNewsList } from '@/api/home/index'
 
 export default {
-  data () {
+  data() {
     return {
       teacherlist: []
     }
   },
-  mounted () {
+  mounted() {
     this.handlegetTeacherList()
   },
   methods: {
-    handlegetTeacherList () {
+    handlegetTeacherList() {
       getNewsList()
         .then(res => {
           if (res.data) {
@@ -40,19 +40,18 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-.banner{
+.banner {
   width: 100%;
   height: 450px;
   line-height: 450px;
   background: #dddddd;
   text-align: center;
 }
-.content{
+.content {
   width: 100%;
   height: 400px;
   line-height: 400px;
   text-align: center;
   // background: #999;
-
 }
 </style>
