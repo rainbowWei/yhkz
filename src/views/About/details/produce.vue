@@ -1,19 +1,18 @@
 <template>
-  <div class="about">
-    <h1>This is an about page</h1>
-  </div>
+  <div class="produce">企業文化sssss</div>
 </template>
+
 <script>
 export default {
-  
+  name: 'produce'
 }
 </script>
 <style lang="scss" scoped>
-.about{
+.produce {
   width: 100%;
-  min-height: calc(100vh - 144px);
+  background: red;
+  height: 450px;
   text-align: center;
   line-height: 50px;
 }
-
 </style>

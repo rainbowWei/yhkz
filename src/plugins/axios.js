@@ -6,13 +6,14 @@ let config = {
   headers: {
     'Content-Type': 'application/json;charset=utf8'
   },
+  withCredentials: true,
   // baseURL: IS_DEV ? `http://yhkz.rainbow.site.com/a/example` : `http://dongju.tech`
-  baseURL: IS_DEV ? `http://dongju.tech` : `http://dongju.tech`
+  baseURL: IS_DEV ? `http://v.juhe.cn` : `http://dongju.tech`
 }
 
 const _axios = nativeAxios.create(config)
 
-_axios.interceptors.request.use(function (config) {
+_axios.interceptors.request.use(function(config) {
   if (config.method === 'get') {
     if (!config.params) {
       config.params = {}
@@ -30,7 +31,7 @@ _axios.interceptors.request.use(function (config) {
 
 // Add a response interceptor
 _axios.interceptors.response.use(
-  function (response) {
+  function(response) {
     // Do something with response data
     if (response.data) {
       return response.data
@@ -38,23 +39,23 @@ _axios.interceptors.response.use(
       return response
     }
   },
-  function (error) {
+  function(error) {
     // Do something with response error
     return Promise.reject(error)
   }
 )
 
-Plugin.install = function (Vue, options) {
+Plugin.install = function(Vue, options) {
   Vue.axios = _axios
   window.axios = _axios
   Object.defineProperties(Vue.prototype, {
     axios: {
-      get () {
+      get() {
         return _axios
       }
     },
     $axios: {
-      get () {
+      get() {
         return _axios
       }
     }

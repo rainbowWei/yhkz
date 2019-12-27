@@ -23,19 +23,20 @@
           <router-link to="/census">节能统计</router-link>
         </li>
         <li>
-          <router-link to="/about">关于我们</router-link>
+          <!-- <p>关于我们</p> -->
+          <router-link to="/about/567">关于我们</router-link>
           <ul class="list-child">
             <li>
-              <router-link to="/about/a/567">公司简介</router-link>
+              <router-link to="/about/567">公司简介</router-link>
             </li>
             <li>
-              <router-link to="/about/a/57">企业文化</router-link>
+              <router-link to="/about/57">企业文化</router-link>
             </li>
             <li>
-              <router-link to="/about/a/56">发展历程</router-link>
+              <router-link to="/about/56">发展历程</router-link>
             </li>
             <li>
-              <router-link to="/about/a/5">联系我们</router-link>
+              <router-link to="/about/5">联系我们</router-link>
             </li>
           </ul>
         </li>
@@ -49,12 +50,18 @@ export default {
   name: 'loginHeader'
 }
 </script>
+<style lang="scss">
+
+</style>
 <style lang="scss" scoped>
+.router-link-active{
+  color: #000 !important;
+}
 .header {
   width: 100%;
   height: 60px;
   line-height: 60px;
-  border-bottom: 4px solid #eee;
+  border-bottom: 1px solid #eee;
 }
 .h-content {
   width: 1200px;
@@ -80,6 +87,11 @@ export default {
       display: block;
     }
   }
+  a{
+    &:hover{
+      color: #3F7AD6 !important;
+    }
+  }
 }
 .sign-in {
   float: right;
@@ -98,6 +110,7 @@ export default {
   position: absolute;
   top: 45px;
   right: -25px;
+  z-index: 1000;
   background: #eee;
   border-radius: 10px;
   padding: 10px 20px;

@@ -25,9 +25,9 @@
         <router-link to="/device/details/809">加热炉燃烧优化控制系统</router-link>
         <span>5</span>
       </li>-->
-      <li v-for="item in data" :key="item.id">
+      <li v-for="item in data" :key="item.id" @click="() => handleTabs(item.id)">
         <router-link
-          :to="{ name: 'deviceDetail', params: {
+          :to="{ name: 'deviceCatalog', params: {
           id: item.id,
           childNode: item.childNode
         }}"
@@ -35,33 +35,45 @@
         <span>{{ item.childNodeLen }}</span>
       </li>
     </ul>
-    <router-view></router-view>
   </div>
 </template>
 <script>
-import { getList } from '@/mock'
+// import { getList } from '@/mock'
+import { getDeviceList } from '@/api/device'
 
 export default {
   name: 'deviceClass',
   data() {
     return {
-      data: []
+      data: [],
+      activeKey: 1 // 当前活动的窗口的下标
     }
   },
   mounted() {
-    getList().then(res => {
-      console.log(res, '____')
-      this.data = res.data
-    })
+    this.handlegetDeviceList()
+  },
+  methods: {
+    handleTabs(key) {
+      this.activeKey = key
+      this.handleGetNewsArticle(key)
+    },
+    handlegetDeviceList(id) {
+      getDeviceList({
+        category_id: id
+      }).then(res => {
+        this.data = res.data.projects
+        console.log(this.data, '____')
+      })
+    }
   }
 }
 </script>
 <style lang="scss" scoped>
 .device {
   width: 100%;
-  min-height: 450px;
+  min-height: calc(100vh - 144px);
 }
-p{
+p {
   width: 900px;
   margin: 0 auto;
   padding-left: 20px;
@@ -71,6 +83,8 @@ p{
   width: 900px;
   height: 100%;
   margin: 0 auto;
+  border: 1px solid #eee;
+  border-radius: 10px;
 }
 .list li {
   //   width: 100%;
@@ -93,8 +107,8 @@ p{
   background: #999;
   border-radius: 10px;
   color: #fff;
-  padding: 5px 10px;
-  margin-top: 10px;
+  padding: 3px 8px;
+  margin-top: 13px;
 }
 p {
   height: 80px;

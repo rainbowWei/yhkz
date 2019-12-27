@@ -39,16 +39,16 @@ export default {
           saveAsImage: {}
         }
       },
-      visualMap: {
-        min: 800,
-        max: 50000,
-        text: ['High', 'Low'],
-        realtime: false,
-        calculable: true,
-        inRange: {
-          color: ['lightskyblue', 'yellow', 'orangered']
-        }
-      },
+      // visualMap: {
+      //   min: 800,
+      //   max: 50000,
+      //   text: ['High', 'Low'],
+      //   realtime: false,
+      //   calculable: true,
+      //   inRange: {
+      //     color: ['lightskyblue', 'yellow', 'orangered']
+      //   }
+      // },
       series: [
         {
           name: '业绩分布图',
@@ -138,6 +138,10 @@ export default {
 <style lang="scss" scoped>
 .echart-map {
   width: 100%;
-  height: 800px;
+  // min-height: calc(100vh - 64px);
+  height: 1000px;
+}
+canvas{
+  font-size: 12px;
 }
 </style>

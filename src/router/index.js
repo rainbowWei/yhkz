@@ -16,9 +16,9 @@ const routes = [
     component: () => import('@/views/About/index.vue'),
     children: [
       {
-        path: '/about/a/:id',
+        path: '/about/:id',
         name: 'aa',
-        component: () => import('@/views/About/details/a.vue')
+        component: () => import('@/views/About/details/index.vue')
       }
     ]
   },
@@ -30,12 +30,40 @@ const routes = [
   {
     path: '/device',
     name: 'device',
-    component: () => import('@/views/device/index.vue')
+    component: () => import('@/views/Device/index.vue')
   },
   {
-    path: '/device/details',
+    path: '/device/category',
     name: 'deviceDetail',
-    component: () => import('@/views/device/details/index.vue')
+    redirect: '/device/process',
+    component: () => import('@/views/Device/category/airHeater/index.vue'),
+    children: [
+      {
+        path: '/device/process',
+        name: 'deviceProcess',
+        component: () => import('@/views/Device/category/airHeater/details/process.vue')
+      },
+      {
+        path: '/device/evaluate',
+        name: 'deviceEvaluate',
+        component: () => import('@/views/Device/category/airHeater/details/evaluate.vue')
+      },
+      {
+        path: '/device/reports',
+        name: 'deviceReports',
+        component: () => import('@/views/Device/category/airHeater/details/reports.vue')
+      },
+      {
+        path: '/device/trend',
+        name: 'deviceTrend',
+        component: () => import('@/views/Device/category/airHeater/details/trend.vue')
+      }
+    ]
+  },
+  {
+    path: '/device/catalog',
+    name: 'deviceCatalog',
+    component: () => import('@/views/Device/category/catalog.vue')
   },
   {
     path: '/census',

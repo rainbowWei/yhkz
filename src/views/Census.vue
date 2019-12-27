@@ -11,8 +11,8 @@ export default {
 <style lang="scss" scoped>
 .census {
   width: 100%;
-  min-height: 450px;
-  line-height: 450px;
+  min-height: calc(100vh - 144px);
+  line-height: 50px;
   text-align: center;
 }
 </style>
