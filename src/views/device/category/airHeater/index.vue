@@ -46,12 +46,12 @@ export default {}
     line-height: 30px;
     font-size: 14px;
     padding: 0 10px;
-    background: #A6B7D1;
+    background: #a6b7d1;
     border-radius: 4px;
     margin: 0 1px;
     box-sizing: border-box;
     &:hover {
-      background:#09429B;
+      background: #09429b;
       color: #fff;
     }
   }

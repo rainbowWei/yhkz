@@ -5,6 +5,9 @@ import store from './store'
 import './plugins/element'
 import './plugins/axios'
 import './styles/index.scss'
+import myCharts from './plugins/myCharts'
+
+Vue.use(myCharts)
 
 Vue.config.productionTip = false
 new Vue({

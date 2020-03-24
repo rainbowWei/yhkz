@@ -1,14 +1,14 @@
 import Vue from 'vue'
 import nativeAxios from 'axios'
 
-const IS_DEV = process.env.NODE_ENV === 'development'
+// const IS_DEV = process.env.NODE_ENV === 'development'
 let config = {
   headers: {
     'Content-Type': 'application/json;charset=utf8'
   },
-  withCredentials: true,
+  withCredentials: true
   // baseURL: IS_DEV ? `http://yhkz.rainbow.site.com/a/example` : `http://dongju.tech`
-  baseURL: IS_DEV ? `http://v.juhe.cn` : `http://dongju.tech`
+  // baseURL: IS_DEV ? `http://v.juhe.cn` : `http://dongju.tech`
 }
 
 const _axios = nativeAxios.create(config)

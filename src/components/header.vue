@@ -13,9 +13,6 @@
         <li>
           <router-link to="/device">装置类别</router-link>
         </li>
-        <!-- <li>
-          <router-link to="/map">业绩地图</router-link>
-        </li>-->
         <li>
           <router-link to="/mapc">业绩地图</router-link>
         </li>
@@ -23,7 +20,6 @@
           <router-link to="/census">节能统计</router-link>
         </li>
         <li>
-          <!-- <p>关于我们</p> -->
           <router-link to="/about/567">关于我们</router-link>
           <ul class="list-child">
             <li>
@@ -51,10 +47,9 @@ export default {
 }
 </script>
 <style lang="scss">
-
 </style>
 <style lang="scss" scoped>
-.router-link-active{
+.router-link-active {
   color: #000 !important;
 }
 .header {
@@ -87,9 +82,9 @@ export default {
       display: block;
     }
   }
-  a{
-    &:hover{
-      color: #3F7AD6 !important;
+  a {
+    &:hover {
+      color: #3f7ad6 !important;
     }
   }
 }

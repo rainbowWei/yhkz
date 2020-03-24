@@ -2,7 +2,7 @@
   <div class="container">
     <!-- <ul>
       <li v-for=" list in teacherlist" :key="list.id">{{list.address}}</li>
-    </ul> -->
+    </ul>-->
     <div class="banner">这是一个轮播图</div>
     <div class="content">
       <p>这里是有两大块内容1.HeroRTS系统的介绍2.HeroRTS系统总体架构以及产品功能</p>
