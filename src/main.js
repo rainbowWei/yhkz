@@ -6,10 +6,13 @@ import './plugins/element'
 import './plugins/axios'
 import './styles/index.scss'
 import myCharts from './plugins/myCharts'
+import drive from '@/directives/driveCharts'
 
 Vue.use(myCharts)
 
 Vue.config.productionTip = false
+Vue.directive('drive', drive)
+
 new Vue({
   router,
   store,

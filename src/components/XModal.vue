@@ -46,7 +46,6 @@ export default {
   },
   methods: {
     mouseDownHandleelse(event) {
-      console.log(this.isTop, this.instance.zIndex, this.maxZIndex, 'jjjjjjj')
       if (this.isTop) {
         this.moveDataelse.x =
           event.pageX - this.$refs[this.instance.uuid].offsetLeft
@@ -101,7 +100,6 @@ export default {
   position: fixed;
   top: 100px;
   left: 100px;
-  cursor: pointer;
   z-index: 1000;
   padding: 0 2px 2px 2px;
 }
@@ -138,6 +136,15 @@ export default {
     top: 10px;
     right: 10px;
     cursor: pointer;
+    &::after {
+      content: '';
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      transform: scale(2.3);
+    }
   }
 }
 .title {

@@ -40,7 +40,11 @@
               <div class="air rotate_l"></div>
               <ul class="air_btn">
                 <li>A</li>
-                <li>R</li>
+                <li
+                  v-for="item in [{uuid:'R1',type:'r',title:'啦啦啦啦'}]"
+                  :key="item.uuid"
+                  @click="handleMultiModal(item)"
+                >R</li>
                 <li>P</li>
               </ul>
               <div class="sf">
@@ -71,7 +75,12 @@
             </div>
             <div class="meiqi">
               <div class="famen famen2">
-                <div class="l rotate"></div>
+                <div
+                  class="l rotate"
+                  v-for="item in [{uuid:'tap1',type:'t',title:'先控画面'}]"
+                  :key="item.uuid"
+                  @click="handleMultiModal(item)"
+                ></div>
                 <ul class="r">
                   <li
                     v-for="item in [{uuid: 'a1', type: 'a', title: '劳资是热风炉'}]"
@@ -209,73 +218,89 @@
     </div>
     <X :data="xData" :maxZIndex="zIndex" @onAddZIndex="addZIndex" @onClose="onCloseX"></X>
     <A :data="aData" :maxZIndex="zIndex" @onAddZIndex="addZIndex" @onClose="onCloseA"></A>
-    <tap></tap>
+    <tap :data="tData" :maxZIndex="zIndex" @onAddZIndex="addZIndex" @onClose="onCloseT"></tap>
+    <R :data="rData" :maxZIndex="zIndex" @onAddZIndex="addZIndex" @onClose="onCloseR"></R>
   </div>
 </template>
 <script>
 import X from '@/components/X.vue'
 import A from '@/components/A.vue'
 import tap from '@/components/tap.vue'
+import R from '@/components/R.vue'
+
+/**
+ * demo
+ */
+import { ormDemoFormat, apiDemoData } from '@/mock/orm'
 export default {
   data() {
     return {
-      tableData: [
-        {
-          pono: '1',
-          state: '烧炉',
-          time: '100min',
-          vault: '1209℃',
-          ability: '60.4',
-          burning: '55.7min',
-          discard: '888.9℃',
-          smokeT: '666.7℃'
-        },
-        {
-          pono: '2',
-          state: '焖炉',
-          time: '100min',
-          vault: '1209℃',
-          ability: '60.4',
-          burning: '55.7min',
-          discard: '888.9℃',
-          smokeT: '666.7℃'
-        },
-        {
-          pono: '3',
-          state: '送风',
-          time: '100min',
-          vault: '1209℃',
-          ability: '60.4',
-          burning: '55.7min',
-          discard: '888.9℃',
-          smokeT: '666.7℃'
-        },
-        {
-          pono: '4',
-          state: '烧炉',
-          time: '100min',
-          vault: '1209℃',
-          ability: '60.4',
-          burning: '55.7min',
-          discard: '888.9℃',
-          smokeT: '666.7℃'
-        }
-      ],
+      // tableData: [
+      //   {
+      //     pono: '1',
+      //     state: '烧炉',
+      //     time: '100min',
+      //     vault: '1209℃',
+      //     ability: '60.4',
+      //     burning: '55.7min',
+      //     discard: '888.9℃',
+      //     smokeT: '666.7℃'
+      //   },
+      //   {
+      //     pono: '2',
+      //     state: '焖炉',
+      //     time: '100min',
+      //     vault: '1209℃',
+      //     ability: '60.4',
+      //     burning: '55.7min',
+      //     discard: '888.9℃',
+      //     smokeT: '666.7℃'
+      //   },
+      //   {
+      //     pono: '3',
+      //     state: '送风',
+      //     time: '100min',
+      //     vault: '1209℃',
+      //     ability: '60.4',
+      //     burning: '55.7min',
+      //     discard: '888.9℃',
+      //     smokeT: '666.7℃'
+      //   },
+      //   {
+      //     pono: '4',
+      //     state: '烧炉',
+      //     time: '100min',
+      //     vault: '1209℃',
+      //     ability: '60.4',
+      //     burning: '55.7min',
+      //     discard: '888.9℃',
+      //     smokeT: '666.7℃'
+      //   }
+      // ],
+      tableData: [],
       dialogStatus: false,
       activeX: '', // 弹窗X所用标识id
       activeA: '', // 弹窗A所用标识id
       xData: {}, // 弹窗X数据
       aData: {}, // 弹窗A数据
+      tData: {}, // 先控画面的数据
+      rData: {}, // 弹窗R数据
       zIndex: 1000 // 弹窗层级
     }
   },
   components: {
     X,
     A,
-    tap
+    tap,
+    R
   },
   mounted() {
     // this.handlegetStationList()
+    apiDemoData().then(res => {
+      const data = ormDemoFormat(res.data)
+      console.log(res.data, data, '=====映射后数据')
+      this.tableData = data.formData
+    })
   },
   methods: {
     // 关闭X弹窗
@@ -286,6 +311,14 @@ export default {
     // 关闭A弹窗
     onCloseA(remain) {
       this.aData = remain
+    },
+    // 关闭先控画面
+    onCloseT(remain) {
+      this.tData = remain
+    },
+    // 关闭R弹窗
+    onCloseR(remain) {
+      this.rData = remain
     },
     // 提高目标弹窗的层级
     promoteZIndex(ins) {
@@ -307,6 +340,16 @@ export default {
           ...this.xData,
           [ins.uuid]: single
         }
+      } else if (modalType === 'T') {
+        this.tData = {
+          ...this.tData,
+          [ins.uuid]: single
+        }
+      } else if (modalType === 'R') {
+        this.rData = {
+          ...this.rData,
+          [ins.uuid]: single
+        }
       }
     },
     // 弹窗层级值递增
@@ -321,9 +364,9 @@ export default {
     },
     // 处理同时触发多个弹窗按钮逻辑
     handleMultiModal(ins) {
-      this.activeA = ins.uuid
+      // this.activeA = ins.uuid
       const temp = this.xData[ins.uuid]
-      const isTop = temp && (temp.zIndex >= this.zIndex)
+      const isTop = temp && temp.zIndex >= this.zIndex
       if (!isTop) {
         this.addZIndex()
         this.promoteZIndex(ins)
@@ -432,6 +475,7 @@ export default {
       }
       .air_btn {
         float: left;
+        cursor: pointer;
       }
     }
     .air {
@@ -522,6 +566,7 @@ export default {
       position: absolute;
       left: 10px;
       bottom: 0;
+      cursor: pointer;
     }
     .r {
       width: 40px;

@@ -19,7 +19,13 @@
             <li>
               <div class="txt fl">
                 <span>P</span>
-                <input type="text" value="999" class="input" />
+                <input
+                  type="text"
+                  value="999"
+                  class="input"
+                  @focus="focusPrice($event)"
+                  @blur="blurPrice($event)"
+                />
               </div>
               <ul class="btns fl">
                 <li class="active">-5</li>
@@ -83,30 +89,30 @@ export default {
     },
     onAddZIndex(zIndex, instance) {
       this.$emit('onAddZIndex', zIndex, instance)
+    },
+    // 文本聚焦事件 为0置空处理 添加输入边框类名
+    focusPrice: function($even) {
+      if ($even.target.value === '0' || $even.target.value === 0) {
+        $even.target.value = ''
+      }
+      $even.target.classList.add('borderactive')
+      console.log('聚焦了')
+    },
+    // 文本失焦事件 为空置0处理  删除输入边框类名
+    blurPrice: function($even) {
+      if ($even.target.value === '') {
+        $even.target.value = 0
+      }
+      $even.target.classList.remove('borderactive')
+      console.log('失焦了')
     }
   }
 }
 </script>
 <style scoped lang='scss'>
-.abox{
+.abox {
   min-width: 350px;
   padding-bottom: 20px;
-}
-.title {
-  height: 24px;
-  line-height: 24px;
-  font-size: 16px;
-  text-align: center;
-  font-weight: bold;
-  color: #5290b7;
-  padding: 5px 0;
-  margin-bottom: 10px;
-  span {
-    display: inline-block;
-    padding: 0 10px;
-    border: 1px solid #5290b7;
-    border-radius: 4px;
-  }
 }
 .list {
   width: 314px;
@@ -121,6 +127,9 @@ export default {
     &:first-child {
       border-bottom: 1px dashed #bbcaca;
     }
+    .borderactive {
+      border: 1px dashed #bbcaca;
+    }
     .txt {
       .input {
         width: 60px;
@@ -129,9 +138,9 @@ export default {
         font-size: 14px;
         box-sizing: border-box;
         margin: 0 11px 0 20px;
-        &:hover {
-          border: 1px dashed #bbcaca;
-        }
+        // &:hover {
+        //   border: 1px dashed #bbcaca;
+        // }
       }
       .autotxt {
         width: 60px;
@@ -144,6 +153,7 @@ export default {
     }
     .btns {
       margin-top: 12px;
+      cursor: pointer;
       li {
         width: 18px;
         height: 18px;
@@ -174,6 +184,7 @@ export default {
       border-radius: 50px;
       margin-top: 9px;
       margin-right: 10px;
+      cursor: pointer;
     }
     .on {
       background: #46a279;

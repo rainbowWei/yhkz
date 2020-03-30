@@ -16,10 +16,20 @@
           </div>
           <div class="left fl">
             <div class="lefttop">
+              <!-- <ul class="SP clearfix" v-for="info in [{uuid: 'a1', type: 'sp', name: 'SP'}]" :key="info">
+                <li>{{info.name}}</li>
+                <li class="input color" v-if="conf[info.name]" @click="onAddLine(info.type, info.uuid)">
+                  <input value="0.00" readonly />
+                </li>
+                <li class="input color" v-else>
+                  <input value="0.00" />
+                </li>
+                <li class="btn">自动</li>
+              </ul>-->
               <ul class="SP clearfix">
                 <li>SP</li>
                 <li class="input color">0.00</li>
-                <li class="btn">自动</li>
+                <li class="btn active">自动</li>
               </ul>
               <ul class="PV clearfix">
                 <li>PV</li>
@@ -92,27 +102,39 @@
             <ul class="PVMD clearfix">
               <li>
                 <span>AV_P</span>
-                <div class="color4">0.00</div>
+                <div class="color4">
+                  <input type="text" value="0.00" readonly />
+                </div>
               </li>
               <li>
                 <span>AV_R</span>
-                <div class="color5">0.00</div>
+                <div class="color5">
+                  <input type="text" value="0.00" readonly />
+                </div>
               </li>
               <li>
                 <span>AV_GC</span>
-                <div class="color6">0.00</div>
+                <div class="color6">
+                  <input type="text" value="0.00" readonly />
+                </div>
               </li>
               <li>
                 <span>AV_J</span>
-                <div class="color7">0.00</div>
+                <div class="color7">
+                  <input type="text" value="0.00" readonly />
+                </div>
               </li>
               <li>
                 <span>AV_C</span>
-                <div class="color8">0.00</div>
+                <div class="color8">
+                  <input type="text" value="0.00" readonly />
+                </div>
               </li>
               <li>
                 <span>AV_D</span>
-                <div class="color9">0.00</div>
+                <div class="color9">
+                  <input type="text" value="0.00" readonly />
+                </div>
               </li>
             </ul>
             <ul class="PVMD clearfix">
@@ -381,7 +403,12 @@
                 </div>
               </li>
             </ul>
-            <div ref="chart1" class="chart" style="width:790px;height:400px;"></div>
+            <div
+              v-drive="driveLineChart"
+              :ref="'chart'+x.uuid"
+              class="chart"
+              style="width:790px;height:400px;"
+            ></div>
           </div>
         </div>
       </div>
@@ -391,6 +418,7 @@
 </template>
 <script>
 import XModal from '@/components/XModal.vue'
+// import conf from '@/plugins/xconf.js'
 export default {
   name: 'X',
   components: {
@@ -399,21 +427,31 @@ export default {
   props: ['title', 'data', 'maxZIndex'],
   data() {
     return {
-      showModal: {
-        show: false, // 弹窗是否显示
-        uuid: '' // 弹窗id
-      }
+      a: 0,
+      infoList: ''
     }
   },
-  beforeUpdate() {
-    console.log(this.data, 'jjjjjjjjjjj update before')
-    console.log(this.$refs.chart1, this.uuid, '++++++')
+  computed: {
+    xData: {
+      get() {
+        return this.data
+      },
+      set() {}
+    },
+    isNotNone() {
+      return Object.keys(this.data).length > 0
+    }
   },
-  mounted() {
-    console.log(this.$refs.chart1, '0000')
-    console.log(this.$refs.chart1, this.uuid, '++++++')
-    if (this.$refs.chart1) {
-      this.$chart.line1(this.$refs.chart1, this.uuid, {
+  methods: {
+    // 获取折线图dom
+    getChartContainDom(uuid) {
+      console.log(this.$refs['chart' + uuid][0], '000000', this.$refs)
+      return this.$refs['chart' + uuid][0]
+    },
+    // 添加曲线
+    onAddLine(type, uuid) {
+      const chartConatinDom = this.getChartContainDom(uuid)
+      const data = {
         xAxis: {
           type: 'category',
           data: [
@@ -429,24 +467,20 @@ export default {
             '13:30',
             '13:40',
             '13:50',
-            '14:00'
+            '14:00',
+            '15:00'
           ]
         }
-      })
-    }
-  },
-  computed: {
-    xData: {
-      get() {
-        return this.data
-      },
-      set() {}
+      }
+      this.driveLineChart(chartConatinDom, data)
     },
-    isNotNone() {
-      return Object.keys(this.data).length > 0
-    }
-  },
-  methods: {
+    // 画弹窗中的折线图
+    driveLineChart(el, data = {}) {
+      if (el) {
+        this.$chart.line1(el, data)
+      }
+    },
+    // 关闭弹窗
     triggerShow(uuid, val) {
       const temp = {}
       Object.keys(this.data).forEach(d => {
@@ -474,21 +508,6 @@ export default {
   min-width: 1080px;
   padding: 0 20px;
   box-sizing: border-box;
-}
-.title {
-  height: 24px;
-  line-height: 24px;
-  font-size: 16px;
-  text-align: center;
-  font-weight: bold;
-  color: #5290b7;
-  padding: 5px 0;
-  span {
-    display: inline-block;
-    padding: 0 20px;
-    border: 1px solid #5290b7;
-    border-radius: 4px;
-  }
 }
 .left {
   width: 250px;
@@ -595,22 +614,34 @@ export default {
       }
     }
     .color4 {
-      color: #81c784;
+      input {
+        color: #81c784;
+      }
     }
     .color5 {
-      color: #80deea;
+      input {
+        color: #80deea;
+      }
     }
     .color6 {
-      color: #90caf9;
+      input {
+        color: #90caf9;
+      }
     }
     .color7 {
-      color: #b39ddb;
+      input {
+        color: #b39ddb;
+      }
     }
     .color8 {
-      color: #f48fb1;
+      input {
+        color: #f48fb1;
+      }
     }
     .color9 {
-      color: #ef9a9a;
+      input {
+        color: #ef9a9a;
+      }
     }
   }
 }
